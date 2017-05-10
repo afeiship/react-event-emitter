@@ -11,7 +11,7 @@ export default class extends PureComponent{
 
   componentWillUnmount(){
     this.__listeners__ = null;
-    this.attachEvents = noop;
+    this.componentAttachEvents = noop;
   }
 
   on(inName, inHandler) {
