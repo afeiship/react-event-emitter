@@ -15,8 +15,8 @@ export default class extends PureComponent{
   }
 
   on(inName, inHandler) {
-    var map = this.__listeners__;
-    var listeners = map[inName] = map[inName] || [];
+    let map = this.__listeners__;
+    let listeners = map[inName] = map[inName] || [];
     listeners.push({owner: this, handler: inHandler});
   }
 
