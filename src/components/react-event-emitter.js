@@ -9,7 +9,7 @@ export default class extends Component{
     this.__listeners__ = {};
     this.__memoeryReady();
     this.__componentWillMount();
-    (this.componentAttachEvents.bind(this) || noop)();
+    (this.componentAttachEvents || noop).call(this);
   }
 
   componentWillUnmount(){
