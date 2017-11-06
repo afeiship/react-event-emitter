@@ -1,23 +1,35 @@
-import React,{PureComponent} from 'react';
+import React,{Component} from 'react';
 
 import noop from 'noop';
 
-export default class extends PureComponent{
+export default class extends Component{
   constructor(props) {
     super(props);
+    this.__initialized__ = false;
     this.__listeners__ = {};
+    this.__memoeryReady();
+    this.__componentWillMount();
     (this.componentAttachEvents.bind(this) || noop)();
   }
 
   componentWillUnmount(){
     this.__listeners__ = null;
+    this.__initialized__ = false;
+    window.onpageshow = null;
     this.componentAttachEvents = noop;
+  }
+
+  componentWillReady(){
+    //to be implement.
   }
 
   on(inName, inHandler) {
     let map = this.__listeners__;
     let listeners = map[inName] = map[inName] || [];
     listeners.push({owner: this, handler: inHandler});
+    return {
+      destroy: this.off(inName,inHandler)
+    };
   }
 
   off(inName, inHandler) {
@@ -46,4 +58,21 @@ export default class extends PureComponent{
       }
     }
   }
+
+  __componentWillMount(){
+    if(!this.__initialized__){
+      this.__initialized__ = true;
+      this.componentWillReady();
+    }
+  }
+
+  __memoeryReady(){
+    window.onpageshow = null;
+    window.onpageshow = (inEvent) => {
+      if (inEvent.persisted) {
+        this.__componentWillMount();
+      }
+    }
+  }
+
 }
