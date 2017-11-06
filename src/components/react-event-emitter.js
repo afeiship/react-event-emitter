@@ -5,16 +5,14 @@ import noop from 'noop';
 export default class extends Component{
   constructor(props) {
     super(props);
-    this.__initialized__ = false;
     this.__listeners__ = {};
-    this.__memoeryReady();
+    this.__transitionReady();
     this.__componentWillMount();
     (this.componentAttachEvents || noop).call(this);
   }
 
   componentWillUnmount(){
     this.__listeners__ = null;
-    this.__initialized__ = false;
     window.onpageshow = null;
     this.componentAttachEvents = noop;
   }
@@ -60,17 +58,14 @@ export default class extends Component{
   }
 
   __componentWillMount(){
-    if(!this.__initialized__){
-      this.__initialized__ = true;
-      this.componentWillReady();
-    }
+    this.componentWillReady();
   }
 
-  __memoeryReady(){
+  __transitionReady(){
     window.onpageshow = null;
     window.onpageshow = (inEvent) => {
       if (inEvent.persisted) {
-        this.__componentWillMount();
+        this.__componentWillMount.call(this);
       }
     }
   }
