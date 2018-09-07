@@ -12,6 +12,8 @@ var useCssSourceMap = cssSourceMapDev || cssSourceMapProd;
 var externals = process.env.NODE_ENV === 'production' ? {
   react: 'react',
   'react-dom': 'react-dom',
+  'next-dom-event':'next-dom-event',
+  'next-js-core2':'next-js-core2',
   'noop':'noop',
 } : {};
 
