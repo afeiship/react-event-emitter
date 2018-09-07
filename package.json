@@ -1,6 +1,6 @@
 {
   "name": "react-event-emitter",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "description": "Custom event utilities with lifecycle maintenance for react.",
   "author": "afeiship <1290657123@qq.com>",
   "keywords": [
@@ -82,10 +82,10 @@
   },
   "dependencies": {
     "classnames": "^2.2.5",
-    "object-assign": "^4.1.1",
     "noop": "github:afeiship/noop",
-    "react": "^15.4.1",
-    "react-dom": "^15.4.1",
+    "object-assign": "^4.1.1",
+    "react": "^16.5.0",
+    "react-dom": "^16.5.0",
     "react-prop-types": "^0.4.0"
   }
 }
