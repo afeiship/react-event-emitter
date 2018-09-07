@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import noop from 'noop';
 
 export default class extends Component {
-  constructor(props) {
-    super(props);
+  constructor(inProps) {
+    super(inProps);
     nx.event.init.call(this);
     this.__transitionReady();
     this.__componentWillMount();
